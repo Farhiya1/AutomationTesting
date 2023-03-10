@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using E_Commerce_AutomationTesting.POMClasses;
@@ -35,18 +36,23 @@ namespace E_Commerce_AutomationTesting.TestCases
 
             // Create an instance of ShopPOM class and enter the shop page.
             ShopPOM EnterTheShop = new ShopPOM(driver);
-            EnterTheShop.EnterShop();
+            EnterTheShop.AddItemToCart();
 
-            // Create an instance of CartPOM class and go to the cart page.
-            CartPOM addToCart = new CartPOM(driver);
-            addToCart.CartPage();
+            // Create an instance of CartPOM class and go to the cart page, Apply edgewords coupon to cart and verify if discount and check if it is applied.
+            CartPOM cart = new CartPOM(driver);
+            cart.GoToCartPage();
+            // Add the edgewords coupon to the cart.
 
-            // Create an instance of CartPOM class and apply a discount coupon.
-            CartPOM addCoupon = new CartPOM(driver);
-            addCoupon.GetDiscount();
+           // CartPOM addDiscount = new CartPOM(driver);
+            cart.AddCoupon();
 
-            // Create an instance of NavigateToCheckoutPOM class and navigate to the checkout page.
-            NavigateToCheckoutPOM checksout = new NavigateToCheckoutPOM(driver);
+            // Check if the discount is applied.
+            Assert.IsTrue(cart.IsDiscountApplied(15));
+            Assert.IsTrue(cart.VerifyDiscountByTotal(15));
+         
+
+          // Create an instance of NavigateToCheckoutPOM class and navigate to the checkout page.
+            CheckoutPOM checksout = new CheckoutPOM(driver);
             checksout.NavigateToCheckoutPage();
 
             // Create an instance of LogoutPOM class and logout of the account.
@@ -72,20 +78,46 @@ namespace E_Commerce_AutomationTesting.TestCases
 
             // Create an instance of ShopPOM class and enter the shop page.
             ShopPOM EnterTheShop = new ShopPOM(driver);
-            EnterTheShop.EnterShop();
+            EnterTheShop.AddItemToCart();
 
             // Create an instance of CartPOM class and go to the cart page.
             CartPOM addToCart = new CartPOM(driver);
-            addToCart.CartPage();
+            addToCart.GoToCartPage();
 
             // Create an instance of NavigateToCheckoutPOM class and navigate to the checkout page.
-            NavigateToCheckoutPOM checksout = new NavigateToCheckoutPOM(driver);
-            checksout.NavigateToCheckoutPage();
+            CheckoutPOM checksout = new CheckoutPOM(driver);
+            //checksout.NavigateToCheckoutPage();
+
+            //Check if payment method is selected 
+
+            bool alreadySelected = checksout.NavigateToCheckoutPage();
+            Assert.That(alreadySelected, Is.True, "Cheque radio button was already selected");
+
+            CheckoutPOM placingOrder= new CheckoutPOM(driver);
+            placingOrder.placeOrder();
 
             // Create an instance of CheckOrderNumberPOM class and check the order number on the confirmation page.
-            CheckOrderNumberPOM orderChecker = new CheckOrderNumberPOM(driver);
-            orderChecker.OrderCheck();
+            OrderConfirmationPOM orderChecker = new OrderConfirmationPOM(driver);
+            //orderChecker.OrderCheck();
 
+            OrdersPOM orders = new OrdersPOM(driver);
+            // orders.OrdersPage();
+
+            string orderNumberValue = orderChecker.OrderCheck();
+            string orderNumberOnOrderPagValue = orders.OrdersPage();
+      
+          
+            //Assert if two order number values are equal.
+            Assert.That(orderNumberOnOrderPagValue, Is.EqualTo(orderNumberValue));
+
+
+            // Compare the two order number values and output the result to the console.
+            if (orderNumberOnOrderPagValue == orderNumberValue)
+            {
+                Console.WriteLine("Order numbers match");
+            }
+
+          
             // Create an instance of LogoutPOM class and logout of the account.
             LogoutPOM logsout = new LogoutPOM(driver);
             logsout.LogoutPage();

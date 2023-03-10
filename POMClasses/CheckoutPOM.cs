@@ -3,17 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace E_Commerce_AutomationTesting.POMClasses
 {
-    internal class NavigateToCheckoutPOM
+    internal class CheckoutPOM
     {
         private IWebDriver _driver;
-        public NavigateToCheckoutPOM(IWebDriver driver) 
+        public CheckoutPOM(IWebDriver driver)
         {
-          
+
             this._driver = driver;
 
         }
@@ -29,7 +30,13 @@ namespace E_Commerce_AutomationTesting.POMClasses
         private IWebElement BillingPhone => _driver.FindElement(By.Id("billing_phone"));
 
 
-        public void NavigateToCheckoutPage()
+
+        List<string> fieldIds = new List<string>() { "billing_first_name", "billing_last_name", "billing_address_1", "billing_city", "billing_postcode", "billing_phone" };
+
+        private IWebElement chequeRadioButton => _driver.FindElement(By.Id("payment_method_cheque"));
+
+        private IWebElement Orders => _driver.FindElement(By.Id("place_order"));
+        public bool NavigateToCheckoutPage()
         {
             //_driver.FindElement(By.CssSelector("body > p > a")).Click();
             //Thread.Sleep(1000);
@@ -38,43 +45,53 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
             //First checking if fields are empty then sending values to the page for billing information. 
             // Ids are stored in a list and a for loop is used to check all the fields to see if it's empty, and if it'sn't, it gets cleared.
-            List<string> fieldIds = new List<string>() { "billing_first_name", "billing_last_name", "billing_address_1", "billing_city", "billing_postcode", "billing_phone" };
-
-             foreach (string fieldId in fieldIds){
-                IWebElement field = _driver.FindElement(By.Id(fieldId));
-            if (!string.IsNullOrEmpty(field.GetAttribute("value")))
+            
+            foreach (string fieldId in fieldIds)
             {
-                field.Clear();
+                IWebElement field = _driver.FindElement(By.Id(fieldId));
+                if (!string.IsNullOrEmpty(field.GetAttribute("value")))
+                {
+                    field.Clear();
+                }
             }
-        }
 
 
-        // New details are sent to Billing details input fields.
-         BillingFirstName.SendKeys("nono");
-         BillingLastName.SendKeys("haha");
-         BillingAddress.SendKeys("Plough Lane");
-         BillingCity.SendKeys("London");
-         BillingPostCode.SendKeys("SW17 0BL");
-         BillingPhone.SendKeys("02085473336");
+            // New details are sent to Billing details input fields.
+            BillingFirstName.SendKeys("nono");
+            BillingLastName.SendKeys("haha");
+            BillingAddress.SendKeys("Plough Lane");
+            BillingCity.SendKeys("London");
+            BillingPostCode.SendKeys("SW17 0BL");
+            BillingPhone.SendKeys("02085473336");
 
 
             //Check if payment method is selected 
-            IWebElement chequeRadioButton = _driver.FindElement(By.Id("payment_method_cheque"));
 
             if (!chequeRadioButton.Selected)
             {
                 Console.WriteLine("NOT SELECTED");
                 chequeRadioButton.Click();
+                return false;
             }
             else
             {
                 Console.WriteLine("ALREADY SELECTED :)");
+                return true;
             }
 
+
             
+            
+
         }
 
 
+        public void placeOrder()
+        {
+            Thread.Sleep(500);
+            // Click the 'Place Order' button.
+            Orders.Click();
+        }
 
 
 
