@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using E_Commerce_AutomationTesting.Utils;
+
 
 
 
@@ -25,7 +25,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
         //Set locators for elements on the webpage.
 
-      
+        // Navigate to account page
         public IWebElement Account => _driver.FindElement(By.LinkText("My account"));
 
         // Enter the username and password into the login form and submit it
@@ -35,12 +35,10 @@ namespace E_Commerce_AutomationTesting.POMClasses
         // Login button sumbitted
         public IWebElement LoginEnter => _driver.FindElement(By.Name("login"));
 
+
         //Login Method
         public void Login()
         {
-
-          
-    
             Account.Click();
             // Get the username and password from environment variables
             string username = Environment.GetEnvironmentVariable("SECRET_USERNAME");

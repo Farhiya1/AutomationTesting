@@ -54,12 +54,13 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
             try
             {
+                // Extracting the subtotal  and discount values from a web page and converting it into a decimal data type
                 decimal subtotal = decimal.Parse(_driver.FindElement(SubtotalLocator).Text.Substring(1));
                 Console.WriteLine($"The subtotal is: £{subtotal}");
                 decimal discount = decimal.Parse(_driver.FindElement(DiscountLocator).Text.Substring(1));
-                Console.WriteLine($"The current discounted amount is: £{discount}");
+                //  Calculating the expected discount by multiplying the subtotal by the discount percentage requested, then rounding the result to two decimal places.
                 decimal expectedDiscount = Math.Round(subtotal * discountRequested/100, 2);
-                Console.WriteLine($"The expected discount amount is: £{expectedDiscount}");
+                Console.WriteLine($"The current discounted amount is: £{discount} and the expected discount amount is: £{expectedDiscount}");
                 return discount == expectedDiscount;
             }
             catch (Exception)

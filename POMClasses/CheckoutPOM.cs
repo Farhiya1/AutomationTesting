@@ -1,11 +1,8 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using E_Commerce_AutomationTesting.Support;
+
+
+
 
 namespace E_Commerce_AutomationTesting.POMClasses
 {
@@ -29,17 +26,15 @@ namespace E_Commerce_AutomationTesting.POMClasses
         private IWebElement BillingPostCode => _driver.FindElement(By.Id("billing_postcode"));
         private IWebElement BillingPhone => _driver.FindElement(By.Id("billing_phone"));
 
-
-
         List<string> fieldIds = new List<string>() { "billing_first_name", "billing_last_name", "billing_address_1", "billing_city", "billing_postcode", "billing_phone" };
-
         private IWebElement chequeRadioButton => _driver.FindElement(By.Id("payment_method_cheque"));
+        private IWebElement  PlaceOrderButton => _driver.FindElement(By.Id("place_order"));
 
-        private IWebElement Orders => _driver.FindElement(By.Id("place_order"));
+
+        //Navigate to checkout page method, complete billing details on checkout page and place order.
         public bool NavigateToCheckoutPage()
         {
-            //_driver.FindElement(By.CssSelector("body > p > a")).Click();
-            //Thread.Sleep(1000);
+          //Click on checkout button
             CheckoutButtons.Click();
 
 
@@ -88,9 +83,12 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
         public void placeOrder()
         {
-            Thread.Sleep(500);
+
+        
+
+            Thread.Sleep(1000);
             // Click the 'Place Order' button.
-            Orders.Click();
+            PlaceOrderButton.Click();
         }
 
 

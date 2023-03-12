@@ -20,21 +20,17 @@ namespace E_Commerce_AutomationTesting.POMClasses
         }
 
 
-
-
-
-
         //Set locators for elements on the webpage.
         //Private propeties that return the 'Shop Link', 'Product' and the 'add-to-cart' button elements.
         private IWebElement Shop => _driver.FindElement(By.LinkText("Shop"));
         private IWebElement Product => _driver.FindElement(By.CssSelector("#main > ul > li.product.type-product.post-28"));
         private IWebElement addToCart => _driver.FindElement(By.Name("add-to-cart"));
 
+        
         // Method that enters the shop, clicks on a product, and adds it to the cart
         public void AddItemToCart()
         {
             Shop.Click();
-
             Product.Click();
             addToCart.Click();
           
