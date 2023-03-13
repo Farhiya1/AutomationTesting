@@ -52,8 +52,8 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
 
             // New details are sent to Billing details input fields.
-            BillingFirstName.SendKeys("nono");
-            BillingLastName.SendKeys("haha");
+            BillingFirstName.SendKeys("John");
+            BillingLastName.SendKeys("Doe");
             BillingAddress.SendKeys("Plough Lane");
             BillingCity.SendKeys("London");
             BillingPostCode.SendKeys("SW17 0BL");

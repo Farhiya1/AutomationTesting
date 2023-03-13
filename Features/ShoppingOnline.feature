@@ -1,20 +1,20 @@
 ﻿Feature: ShoppingOnline
 
-As an online store owner, my goal is a seamless shopping and checkout experience for customers, including discounts and order verification.
+As an online store owner, my goal is to create a seamless shopping and checkout experience for customers, including applying discounts and order verification.
 
   Background:
 
     Given I am logged in to my account
 
 
-#Scenario 1
+@Scenario1
 Scenario: Apply discount coupon to cart
 	When I add an item to my cart
 	When  I apply the discount coupon edgewords
 	Then I should see a 15% discount applied to my cart total
 	And I should be able to logout
 
-#Scenario 2
+@Scenario2
 Scenario: Purchase item and confirm order number
     When I add an item to my cart
     And I proceed to checkout

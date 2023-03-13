@@ -22,7 +22,7 @@ public class ShoppingOnlineSteps
 
         public ShoppingOnlineSteps(ScenarioContext scenarioContext) 
         {
-            //  _scenarioContext = scenarioContext;
+            
             // _scenarioContext = scenarioContext;
             
          
@@ -74,7 +74,7 @@ public class ShoppingOnlineSteps
            Assert.IsTrue(cart.IsDiscountApplied(verifyCouponDiscount));
            Assert.IsTrue(cart.VerifyDiscountByTotal(verifyCouponDiscount));
 
-           Helpers.TakeScreenshot(driver, "test1.png");
+           Helpers.TakeScreenshot(driver, "capture-discount.png");
            
 
         }
@@ -124,7 +124,7 @@ public class ShoppingOnlineSteps
             Assert.That(orderNumberOnOrderPagValue, Is.EqualTo(orderNumberValue));
 
 
-            // Compare the two order number values and output the result to the console.
+            // Compare the two order number values and output the result to the console for debugging purpose.
             if (orderNumberOnOrderPagValue == orderNumberValue)
             {
                 Console.WriteLine("Order numbers match");

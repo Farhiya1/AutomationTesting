@@ -35,8 +35,8 @@ namespace E_Commerce_AutomationTesting.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "ShoppingOnline", "As an online store owner, my goal is a seamless shopping and checkout experience " +
-                    "for customers, including discounts and order verification.", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "ShoppingOnline", "As an online store owner, my goal is to create a seamless shopping and checkout e" +
+                    "xperience for customers, including applying discounts and order verification.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -85,9 +85,11 @@ namespace E_Commerce_AutomationTesting.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Apply discount coupon to cart")]
+        [NUnit.Framework.CategoryAttribute("Scenario1")]
         public void ApplyDiscountCouponToCart()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Scenario1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apply discount coupon to cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 11
@@ -121,9 +123,11 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Purchase item and confirm order number")]
+        [NUnit.Framework.CategoryAttribute("Scenario2")]
         public void PurchaseItemAndConfirmOrderNumber()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "Scenario2"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Purchase item and confirm order number", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 18

@@ -22,7 +22,7 @@ namespace E_Commerce_AutomationTesting.Support
 
             // Initialize the ChromeDriver or FirefoxDriver instance
 
-            string browser = "chrome"; 
+            string browser = "firefox"; 
             switch (browser.ToLower())
             {
                 case "firefox":
@@ -56,7 +56,7 @@ namespace E_Commerce_AutomationTesting.Support
         {
 
             // Quit the ChromeDriver instance
-            // driver.Quit();
+            driver.Quit();
         }
 
 

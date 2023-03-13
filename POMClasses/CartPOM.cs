@@ -78,7 +78,6 @@ namespace E_Commerce_AutomationTesting.POMClasses
             try
             {
                 decimal subtotal = decimal.Parse(_driver.FindElement(SubtotalLocator).Text.Substring(1));
-
                 decimal discount = decimal.Parse(_driver.FindElement(DiscountLocator).Text.Substring(1));
                 decimal expectedDiscount = Math.Round(subtotal * discountRequested /100, 2);
                 decimal total = decimal.Parse(_driver.FindElement(TotalLocator).Text.Substring(1));

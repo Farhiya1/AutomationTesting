@@ -33,12 +33,13 @@ namespace E_Commerce_AutomationTesting.POMClasses
         public string ConfirmOrderNumber()
            
         {
-            Helpers.TakeScreenshot(_driver, "test2.png");
+            
 
 
             // Find and extract the order number value from the order confirmation message.  
             string orderNumberValue =  _driver.FindElement(orderNumberLocator).Text.Substring(13).Trim();
 
+            Helpers.TakeScreenshot(_driver, "test2.png");
             // Output the order number value to the console.
             Console.WriteLine($"order number value is: {orderNumberValue}");
            
