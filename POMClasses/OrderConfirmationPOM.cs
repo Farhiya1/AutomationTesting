@@ -24,31 +24,31 @@ namespace E_Commerce_AutomationTesting.POMClasses
         }
 
 
-        // Private property to get the 'Place Order' button element.
-        //private IWebElement Orders => _driver.FindElement(By.Id("place_order"));
-        private By orderNumberLocator = By.CssSelector("#post-6 > div > div > div > ul > li.woocommerce-order-overview__order.order");
-
-        //private By orderNumberOnOrderPageLocator = By.CssSelector("#post-7 > div > div > div > table > tbody > tr > td.woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number");
+        private IWebElement orderNumberLocator => _driver.FindElement(By.CssSelector("#post-6 ul > li.woocommerce-order-overview__order.order")); 
+        private IWebElement MyAccountPage => _driver.FindElement(By.LinkText("My account"));
+       
 
         public string ConfirmOrderNumber()
            
         {
-            
-
 
             // Find and extract the order number value from the order confirmation message.  
-            string orderNumberValue =  _driver.FindElement(orderNumberLocator).Text.Substring(13).Trim();
+          
+            Helpers.WaitForElDisplayed(By.CssSelector("#post-6 ul > li.woocommerce-order-overview__order.order"), 5, _driver);
 
-            Helpers.TakeScreenshot(_driver, "test2.png");
+            string orderNumberValue = orderNumberLocator.Text.Substring(13).Trim();
+            Helpers.TakeScreenshot(_driver, "ordernumber.png");
             // Output the order number value to the console.
             Console.WriteLine($"order number value is: {orderNumberValue}");
            
 
             // Navigate to the 'My Account' page.
-            _driver.FindElement(By.LinkText("My account")).Click();
+
+            MyAccountPage.Click();
 
             return orderNumberValue;
-            
+           
+
         }
 
     }

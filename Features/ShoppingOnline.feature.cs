@@ -85,11 +85,9 @@ namespace E_Commerce_AutomationTesting.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Apply discount coupon to cart")]
-        [NUnit.Framework.CategoryAttribute("Scenario1")]
         public void ApplyDiscountCouponToCart()
         {
-            string[] tagsOfScenario = new string[] {
-                    "Scenario1"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apply discount coupon to cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 11
@@ -109,13 +107,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I add an item to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
- testRunner.When("I apply the discount coupon edgewords", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I apply the discount coupon \"edgewords\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
  testRunner.Then("I should see a 15% discount applied to my cart total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 15
- testRunner.And("I should be able to logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -123,11 +118,9 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Purchase item and confirm order number")]
-        [NUnit.Framework.CategoryAttribute("Scenario2")]
         public void PurchaseItemAndConfirmOrderNumber()
         {
-            string[] tagsOfScenario = new string[] {
-                    "Scenario2"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Purchase item and confirm order number", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 18
@@ -151,9 +144,6 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 21
  testRunner.Then("The order number shown should match the order number on orders page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 22
- testRunner.And("I should be able to logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

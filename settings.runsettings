@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="billingFirstName " value="John" />
+		<Parameter name="billingLastName" value="Doe" />
+		<Parameter name="billingAddress" value="Plough Lane" />
+		<Parameter name="billingCity" value="London" />
+		<Parameter name="billingPostCode" value="SW17 0BL" />
+		<Parameter name="billingPhone" value="02085473336" />
+		
+	</TestRunParameters>
+</RunSettings>

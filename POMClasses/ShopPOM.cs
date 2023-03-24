@@ -1,9 +1,13 @@
-﻿using OpenQA.Selenium;
+﻿using E_Commerce_AutomationTesting.Support;
+using NUnit.Framework.Internal;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static E_Commerce_AutomationTesting.Support.Helpers;
 
 namespace E_Commerce_AutomationTesting.POMClasses
 {
@@ -24,7 +28,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
         //Private propeties that return the 'Shop Link', 'Products' and the 'add-to-cart' button elements.
         private IWebElement Shop => _driver.FindElement(By.LinkText("Shop"));
-        private By ProductElementLocator = By.CssSelector("#main > ul > li.product");
+       private  IList<IWebElement> ProductElementLocator => _driver.FindElements(By.CssSelector("#main > ul > li.product"));
         private IWebElement addToCart => _driver.FindElement(By.Name("add-to-cart"));
 
 
@@ -35,15 +39,24 @@ namespace E_Commerce_AutomationTesting.POMClasses
             Shop.Click();
 
             // Get all the product elements on the page using the ProductElementLocator
-            var productElements = _driver.FindElements(ProductElementLocator);
+            
+            var productElements = ProductElementLocator;
 
             // Select a random product 
-            var randomIndex = new Random().Next(0, productElements.Count);
+            var randomIndex = new Random().Next(0, ProductElementLocator.Count);
             var productElement = productElements[randomIndex];
 
             // Click the random product element and add it to the cart
+            string productName = productElement.Text;
+     
+            //int index = productName.IndexOf("SALE!");
+            //productName = productName[..index];
+            Console.WriteLine("The product selected is: " + productName);
             productElement.Click();
+            Helpers.TakeScreenshot(_driver, "productpicture.png");
+
             addToCart.Click();
+            
 
         }
     }

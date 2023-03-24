@@ -1,9 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using E_Commerce_AutomationTesting.Support;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static E_Commerce_AutomationTesting.Support.Helpers;
 
 namespace E_Commerce_AutomationTesting.POMClasses
 {
@@ -17,82 +19,72 @@ namespace E_Commerce_AutomationTesting.POMClasses
             this._driver = driver;
         }
 
-        //Locators to find elements for the cart link, coupon code, dismiss the store notice banner at the footer of the page and click the discount button.
+        //Locators to find elements for the cart link, coupon code and click the discount button.
         private IWebElement Cart => _driver.FindElement(By.LinkText("Cart"));
         private IWebElement SendCoupon => _driver.FindElement(By.Id("coupon_code"));
-        private IWebElement DismissStoreNotice => _driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link"));
         private IWebElement DiscountButton => _driver.FindElement(By.ClassName("button"));
+        private IWebElement SubtotalElement => _driver.FindElement(By.CssSelector("#post-5 .cart-subtotal span"));
+        private IWebElement DiscountElement => _driver.FindElement(By.CssSelector("#post-5 .cart-discount span"));
+        private IWebElement TotalElement => _driver.FindElement(By.CssSelector("#post-5 .order-total strong span"));
+        private IWebElement ShippingElement => _driver.FindElement(By.CssSelector("#shipping_method > li > label > span"));
+        private IWebElement CheckoutButtons => _driver.FindElement(By.LinkText("Proceed to checkout"));
 
-        private By SubtotalLocator = By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table > tbody > tr.cart-subtotal > td > span");
-        private By DiscountLocator = By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table > tbody > tr.cart-discount.coupon-edgewords > td > span");
-        private By TotalLocator = By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table > tbody > tr.order-total > td > strong > span");
-           
-
-        //Method to click on the cart link and dismsis store notice banner.
+        //Method to click on the cart link.
         public void GoToCartPage()
         {
             
-            Cart.Click();
-            DismissStoreNotice.Click();
+            Cart.Click(); 
+          
         }
 
         //Method to add the edgewords coupon to get a discount
-      
-        public void AddCoupon()
+  
+        public void AddCoupon(string coupon)
         {
-            
-            SendCoupon.SendKeys("edgewords");
+           
+            SendCoupon.SendKeys(coupon);
             DiscountButton.Click();
             
-
-        }
-
-        // Method to check if the discount is applied.
-        public bool IsDiscountApplied(int discountRequested)
-        {
-
-
-            try
-            {
-                // Extracting the subtotal  and discount values from a web page and converting it into a decimal data type
-                decimal subtotal = decimal.Parse(_driver.FindElement(SubtotalLocator).Text.Substring(1));
-                Console.WriteLine($"The subtotal is: £{subtotal}");
-                decimal discount = decimal.Parse(_driver.FindElement(DiscountLocator).Text.Substring(1));
-                //  Calculating the expected discount by multiplying the subtotal by the discount percentage requested, then rounding the result to two decimal places.
-                decimal expectedDiscount = Math.Round(subtotal * discountRequested/100, 2);
-                Console.WriteLine($"The current discounted amount is: £{discount} and the expected discount amount is: £{expectedDiscount}");
-                return discount == expectedDiscount;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
         }
 
 
-
-        // Method to verify the total discount.
-        public bool VerifyDiscountByTotal(int discountRequested)
+        // Method that extracts the discount value from a web page and returns it as a decimal for verification.
+        public decimal GetSubtotal()
         {
-            try
-            {
-                decimal subtotal = decimal.Parse(_driver.FindElement(SubtotalLocator).Text.Substring(1));
-                decimal discount = decimal.Parse(_driver.FindElement(DiscountLocator).Text.Substring(1));
-                decimal expectedDiscount = Math.Round(subtotal * discountRequested /100, 2);
-                decimal total = decimal.Parse(_driver.FindElement(TotalLocator).Text.Substring(1));
-                decimal expectedTotal = subtotal - expectedDiscount + 3.95m;
-                Console.WriteLine($"The total amount is: £{total}. The expected total is: £{expectedTotal}.");
-
-                return total == expectedTotal;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
            
+            return decimal.Parse(SubtotalElement.Text.Substring(1));
+
         }
 
+        // Method that extracts the discount value from a web page and returns it as a decimal for verification.
+        public decimal GetDiscount()
+        {
+            // Wait for the discount element to be displayed before extracting the value.
+            Helpers.WaitForElDisplayed(By.CssSelector("#post-5 .cart-discount span"), 10, _driver);
+            return decimal.Parse(DiscountElement.Text.Substring(1));
+
+        }
+
+        // Method that extracts the total value from a web page and returns it as a decimal for verification.
+        public decimal GetTotal()
+        {
+        
+            return decimal.Parse(TotalElement.Text.Substring(1));
+        }
+
+        // Method that extracts the shipping fee value from a web page and returns it as a decimal for calculating the total amount.
+        public decimal GetShippingFee()
+        {
+            
+            return decimal.Parse(ShippingElement.Text.Substring(1));
+        }
+
+
+        // Method to navigate to the checkout page.
+        public void NavigateToCheckoutPage()
+        {
+            CheckoutButtons.Click();
+        }
 
 
     }

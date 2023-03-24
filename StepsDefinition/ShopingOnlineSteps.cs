@@ -5,7 +5,7 @@ using E_Commerce_AutomationTesting.POMClasses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
-using static E_Commerce_AutomationTesting.Support.HooksClass;
+//using static E_Commerce_AutomationTesting.Support.HooksClass;
 using static E_Commerce_AutomationTesting.Support.Helpers;
 using E_Commerce_AutomationTesting.Support;
 
@@ -16,17 +16,17 @@ namespace E_ommerce_AutomationTesting.StepsDefinition
 public class ShoppingOnlineSteps 
 
 {
-     //  private readonly ScenarioContext _scenarioContext;
-        //private IWebDriver driver;
-       
+        private readonly ScenarioContext _scenarioContext;
+        private IWebDriver driver;
+
 
         public ShoppingOnlineSteps(ScenarioContext scenarioContext) 
         {
             
-            // _scenarioContext = scenarioContext;
-            
-         
-
+             _scenarioContext = scenarioContext;
+            this.driver = (IWebDriver)_scenarioContext["driver"];
+               
+           
         }
 
        // Method logs in the user to their account.
@@ -52,14 +52,15 @@ public class ShoppingOnlineSteps
         }
 
         // Method applies a discount coupon to the user's cart.
-
-        [When(@"I apply the discount coupon edgewords")]
-        public void WhenIApplyTheDiscountCouponEdgewords()
+        [When(@"I apply the discount coupon ""(.*)""")]
+        public void WhenIApplyTheDiscountCoupon(string coupon)
         {
+         
             // Create an instance of CartPOM class, navigate to the cart page and apply the edgewords coupon to the cart
             CartPOM cart = new CartPOM(driver);
             cart.GoToCartPage();
-            cart.AddCoupon();
+           
+            cart.AddCoupon(coupon);
             
         }
 
@@ -69,15 +70,27 @@ public class ShoppingOnlineSteps
         public void ThenIShouldSeeADiscountAppliedToMyCartTotal(int verifyCouponDiscount)
         {
             CartPOM cart = new CartPOM(driver);
+          
+            decimal subtotal = cart.GetSubtotal();
+            Console.WriteLine($"The subtotal is: £{subtotal}");
+            decimal discount = cart.GetDiscount();
+            decimal expectedDiscount = Math.Round(subtotal * verifyCouponDiscount / 100, 2);
+            Console.WriteLine($"The current discounted amount is: £{discount} and the expected discount amount is: £{expectedDiscount}");
+            decimal total = cart.GetTotal();
+            decimal shippingAmount = cart.GetShippingFee();
+            Console.WriteLine(shippingAmount);
+            decimal expectedTotal = subtotal - expectedDiscount + shippingAmount;
+            Console.WriteLine($"The total amount is: £{total}. The expected total is: £{expectedTotal}.");
 
-            
-           Assert.IsTrue(cart.IsDiscountApplied(verifyCouponDiscount));
-           Assert.IsTrue(cart.VerifyDiscountByTotal(verifyCouponDiscount));
+            //Assertions
+            Assert.IsTrue(discount == expectedDiscount);
+            Assert.IsTrue(total == expectedTotal);
 
-           Helpers.TakeScreenshot(driver, "capture-discount.png");
-           
+            Helpers.TakeScreenshot(driver, "capturediscount.png");  
 
         }
+
+
         //Method proceeds the user to the checkout page.
 
         [When(@"I proceed to checkout")]
@@ -86,20 +99,32 @@ public class ShoppingOnlineSteps
             // Create an instance of CartPOM class, navigate to the cart page.
             CartPOM addToCart = new CartPOM(driver);
             addToCart.GoToCartPage();
+            CartPOM proceedToCheckout = new CartPOM(driver);
+            proceedToCheckout.NavigateToCheckoutPage();
             // Create an instance of CheckoutPOM class and navigate to the checkout page.
             CheckoutPOM checksout = new CheckoutPOM(driver);
-            // If the cheque radio button is already selected, print a message to the console for debugging purposes.
-            bool alreadyselected = checksout.NavigateToCheckoutPage();
-            if (alreadyselected)
-            {
-                Console.WriteLine("The cheque radio button was already selected.");
-            }
-
-            //Assert that the cheque radio button is selected.
-
-            Assert.That(alreadyselected, Is.True, "cheque radio button was already selected");
-
+           // checksout.EnterBillingDetails();
+            string firstName = TestContext.Parameters["billingFirstName "];
+            string lastName = TestContext.Parameters["billingLastName"];
+            string address = TestContext.Parameters["billingAddress"];
            
+            string city = TestContext.Parameters["billingCity"];
+        
+            string postcode = TestContext.Parameters["billingPostCode"];
+            string phoneNumber = TestContext.Parameters["billingPhone"];
+         
+            checksout.SetFirstName(firstName);
+            checksout.SetLastName(lastName);
+            checksout.SetAddressLine1(address);
+
+            checksout.SetBillingCity(city);
+
+            checksout.SetPostcode(postcode);
+            checksout.SetPhoneNumber(phoneNumber);
+
+          
+            checksout.SelectChequeRadioButton();
+
         }
 
         //Method verifies the order number on the order confirmation page with the order number on the orders page.
@@ -122,22 +147,8 @@ public class ShoppingOnlineSteps
 
             //Assert if two order number values are equal.
             Assert.That(orderNumberOnOrderPagValue, Is.EqualTo(orderNumberValue));
-
-
-            // Compare the two order number values and output the result to the console for debugging purpose.
-            if (orderNumberOnOrderPagValue == orderNumberValue)
-            {
-                Console.WriteLine("Order numbers match");
-            }
             
         }
 
-        [Then(@"I should be able to logout")]
-        public void ThenIShouldBeAbleToLogout()
-        {
-            // Create an instance of LogoutPOM class and logs user out of the account.
-            LogoutPOM logsout = new LogoutPOM(driver);
-            logsout.LogoutPage();
-        }
     }
 }
