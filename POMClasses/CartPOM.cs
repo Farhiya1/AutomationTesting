@@ -48,7 +48,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
             
         }
 
-        // Extracts the text from an IWebElement and returns it as a decimal value with the first character removed.
+        // Method extracts the text from an IWebElement and returns it as a decimal value with the first character removed.
         public decimal GetElementTextSubstring(IWebElement element)
         {
             string text = element.Text;
