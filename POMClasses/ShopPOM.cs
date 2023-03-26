@@ -46,15 +46,30 @@ namespace E_Commerce_AutomationTesting.POMClasses
             var randomIndex = new Random().Next(0, ProductElementLocator.Count);
             var productElement = productElements[randomIndex];
 
-            // Click the random product element and add it to the cart
+            // Extract the product name from the product element text
             string productName = productElement.Text;
-     
-            //int index = productName.IndexOf("SALE!");
-            //productName = productName[..index];
+
+            // Determine the index of the pound sign and "SALE!" text in the product name
+            int poundIndex = productName.IndexOf('£');
+            int saleIndex = productName.IndexOf("SALE!");
+            // If the "SALE!" text appears before the pound sign, extract the text before "SALE!"
+            if (saleIndex >= 0 && saleIndex < poundIndex)
+            {
+                productName = productName.Substring(0, saleIndex).Trim();
+            }
+            else
+            // If the pound sign appears in the product name, extract the text before the pound sign
+            {
+
+                productName = poundIndex >= 0 ? productName.Substring(0, poundIndex).Trim() : productName;
+            }
+            // Print the selected product name
             Console.WriteLine("The product selected is: " + productName);
+
+            // Click the random product element and take a screenshot
             productElement.Click();
             Helpers.TakeScreenshot(_driver, "productpicture.png");
-            //Adding items to cart
+            // Add the selected product to the cart
             addToCart.Click();
             
 
