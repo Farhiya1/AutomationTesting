@@ -77,7 +77,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
         }
 
 
-       
+       //Method to place order 
         public void placeOrder()
         {
 

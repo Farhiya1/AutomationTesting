@@ -28,6 +28,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
         private IWebElement MyAccountPage => _driver.FindElement(By.LinkText("My account"));
        
 
+        //Methods to get the order number
         public string ConfirmOrderNumber()
            
         {

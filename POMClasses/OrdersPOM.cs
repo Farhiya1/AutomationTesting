@@ -23,6 +23,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
         private IWebElement orderNumberOnOrderPageLocator => _driver.FindElement(By.CssSelector("#post-7 .woocommerce-orders-table__cell-order-number")); 
         private IWebElement NavigateToOrdersPage => _driver.FindElement(By.CssSelector("#post-7 .woocommerce-MyAccount-navigation-link--orders"));
 
+        //Method to return order number from order page
         public string OrdersPage()
         {
             //Navigate to orders page

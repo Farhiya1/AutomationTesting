@@ -35,7 +35,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
         // Method that enters the shop, selects a random product, and adds it to the cart
         public void AddItemToCart()
         {
-
+            //Clicking on shop link
             Shop.Click();
 
             // Get all the product elements on the page using the ProductElementLocator
@@ -54,7 +54,7 @@ namespace E_Commerce_AutomationTesting.POMClasses
             Console.WriteLine("The product selected is: " + productName);
             productElement.Click();
             Helpers.TakeScreenshot(_driver, "productpicture.png");
-
+            //Adding items to cart
             addToCart.Click();
             
 
