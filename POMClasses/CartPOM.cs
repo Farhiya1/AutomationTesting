@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static E_Commerce_AutomationTesting.Support.Helpers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace E_Commerce_AutomationTesting.POMClasses
 {
@@ -48,11 +49,18 @@ namespace E_Commerce_AutomationTesting.POMClasses
         }
 
 
+        public decimal GetElementTextSubstring(IWebElement element)
+        {
+            string text = element.Text;
+            return decimal.Parse(text.Substring(1));
+        }
+
         // Method that extracts the discount value from a web page and returns it as a decimal for verification.
         public decimal GetSubtotal()
         {
-           
-            return decimal.Parse(SubtotalElement.Text.Substring(1));
+
+            
+            return GetElementTextSubstring(SubtotalElement);
 
         }
 
@@ -61,22 +69,24 @@ namespace E_Commerce_AutomationTesting.POMClasses
         {
             // Wait for the discount element to be displayed before extracting the value.
             Helpers.WaitForElDisplayed(By.CssSelector("#post-5 .cart-discount span"), 10, _driver);
-            return decimal.Parse(DiscountElement.Text.Substring(1));
+           
 
+            return GetElementTextSubstring(DiscountElement);
         }
 
         // Method that extracts the total value from a web page and returns it as a decimal for verification.
         public decimal GetTotal()
         {
-        
-            return decimal.Parse(TotalElement.Text.Substring(1));
+
+            return GetElementTextSubstring(TotalElement);
         }
 
         // Method that extracts the shipping fee value from a web page and returns it as a decimal for calculating the total amount.
         public decimal GetShippingFee()
         {
-            
-            return decimal.Parse(ShippingElement.Text.Substring(1));
+
+         
+            return GetElementTextSubstring(ShippingElement);
         }
 
 

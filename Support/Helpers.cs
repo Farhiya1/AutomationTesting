@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Security.Policy;
 using System.Reflection;
+using OpenQA.Selenium.Support.Extensions;
 
 namespace E_Commerce_AutomationTesting.Support
 {
@@ -27,7 +28,7 @@ namespace E_Commerce_AutomationTesting.Support
             {
                 Directory.CreateDirectory(folderPath);
             }
-
+          
             ITakesScreenshot screenShotBug = driver as ITakesScreenshot;
             Screenshot screenshotForm = screenShotBug.GetScreenshot();
             string filePath = Path.Combine(folderPath, screenshotname);

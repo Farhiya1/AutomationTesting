@@ -37,7 +37,8 @@ namespace E_Commerce_AutomationTesting.POMClasses
             Helpers.WaitForElDisplayed(By.CssSelector("#post-6 ul > li.woocommerce-order-overview__order.order"), 5, _driver);
 
             string orderNumberValue = orderNumberLocator.Text.Substring(13).Trim();
-            Helpers.TakeScreenshot(_driver, "ordernumber.png");
+            Helpers.TakeScreenshot(_driver, "confirmordernumber.png");
+         
             // Output the order number value to the console.
             Console.WriteLine($"order number value is: {orderNumberValue}");
            

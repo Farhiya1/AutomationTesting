@@ -69,14 +69,15 @@ namespace E_Commerce_AutomationTesting.POMClasses
             BillingPhone.Click();
             BillingPhone.SendKeys(phoneNumber);
         }
-
-
         public void SelectChequeRadioButton()
         {
+           Thread.Sleep(1000);
+           
             chequeRadioButton.Click();
         }
 
-        //Method that places an order by clicking the 'Place Order' button.
+
+       
         public void placeOrder()
         {
 

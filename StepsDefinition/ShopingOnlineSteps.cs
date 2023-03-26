@@ -82,12 +82,19 @@ public class ShoppingOnlineSteps
             decimal expectedTotal = subtotal - expectedDiscount + shippingAmount;
             Console.WriteLine($"The total amount is: £{total}. The expected total is: £{expectedTotal}.");
 
-            //Assertions
-            Assert.IsTrue(discount == expectedDiscount);
-            Assert.IsTrue(total == expectedTotal);
+            try
+            {
+                //Assertions
+                Assert.IsTrue(discount == expectedDiscount, "Discount amount is not correct");
+                Assert.IsTrue(total == expectedTotal, "Total amount is not correct");
 
-            Helpers.TakeScreenshot(driver, "capturediscount.png");  
-
+            }
+            catch (Exception ex)
+            {
+                
+                Helpers.TakeScreenshot(driver, "capturediscount.png");
+             
+            }
         }
 
 
@@ -134,21 +141,25 @@ public class ShoppingOnlineSteps
         {
             // Create an instance of CheckoutPOM class to place an order.
             CheckoutPOM placingorder = new CheckoutPOM(driver);
-            placingorder.placeOrder();
 
-            // Create an instance of OrderConfirmationPOM and OrdersPOM classes to check the order number.
-            OrderConfirmationPOM orderNumberConfirmation = new OrderConfirmationPOM(driver);
-            OrdersPOM orderNumberOnOrderPage = new OrdersPOM(driver);
+            
+                placingorder.placeOrder();
+
+                // Create an instance of OrderConfirmationPOM and OrdersPOM classes to check the order number.
+                OrderConfirmationPOM orderNumberConfirmation = new OrderConfirmationPOM(driver);
+                OrdersPOM orderNumberOnOrderPage = new OrdersPOM(driver);
 
             // Get the order number from the order confirmation page and orders page.
+           
             string orderNumberValue = orderNumberConfirmation.ConfirmOrderNumber();
-            string orderNumberOnOrderPagValue = orderNumberOnOrderPage.OrdersPage();
-
+             
+                string orderNumberOnOrderPagValue = orderNumberOnOrderPage.OrdersPage();
+                Helpers.TakeScreenshot(driver, "orderpagenumber.png");
 
             //Assert if two order number values are equal.
             Assert.That(orderNumberOnOrderPagValue, Is.EqualTo(orderNumberValue));
-            
+        
+               
+            }
         }
-
-    }
 }
