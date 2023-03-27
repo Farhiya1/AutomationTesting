@@ -1,7 +1,5 @@
 # E-Commerce-AutomationTesting
 
-# Shopping Online Steps
-
 This is a C# project for automating e-commerce testing using SpecFlow and Selenium. The project includes two end-to-end tests that cover multiple pages and scenarios to simulate a real-world shopping experience.
 
 # Prerequisites
