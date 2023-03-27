@@ -56,23 +56,23 @@ Each scenario is preceded by a brief description of the behavior it verifies. Th
 
 The test scenarios in the project consist of the following steps in the steps definition file, which represent the sequence of actions performed by the scenarios and the breakdown of the project's functionality:
 
-Given I am logged in to my account: This step logs in the user to their account.
-When I add an item to my cart: This step adds an item to the user's cart.
-When I apply the discount coupon "coupon": This step applies a discount coupon to the user's cart.
-Then I should see a verifyCouponDiscount% discount applied to my cart total: This step verifies the discount applied to the user's cart.
-When I proceed to checkout: This step proceeds the user to the checkout page.
-Then The order number shown should match the order number on orders page: This step verifies the order number on the order confirmation page with the order number on the orders page.
+- Given I am logged in to my account: This step logs in the user to their account.
+- When I add an item to my cart: This step adds an item to the user's cart.
+- When I apply the discount coupon "coupon": This step applies a discount coupon to the user's cart.
+- Then I should see a verifyCouponDiscount% discount applied to my cart total: This step verifies the discount applied to the user's cart.
+- When I proceed to checkout: This step proceeds the user to the checkout page.
+- Then The order number shown should match the order number on orders page: This step verifies the order number on the order confirmation page with the order number on the orders page.
 
 #POM Classes
 
 The project includes the following POM classes:
 
-LoginPOM: This class represents the behavior of the login page. It contains methods for entering the user's credentials and logging in to their account.
-ShopPOM: This class represents the behavior of the shop page. It contains methods for selecting and adding items to the user's cart.
-CartPOM: This class represents the behavior of the cart page. It contains methods for applying discount coupons, navigating to the checkout page, and retrieving cart information such as the subtotal and shipping fees.
-CheckoutPOM: This class represents the behavior of the checkout page. It contains methods for entering the user's billing information and placing an order.
-OrderConfirmationPOM: This class represents the behavior of the order confirmation page. It contains methods for verifying the order number displayed on the page.
-OrdersPOM: This class represents the behavior of the orders page. It contains methods for retrieving the user's order history and verifying the order number displayed on the page.
+- LoginPOM: This class represents the behavior of the login page. It contains methods for entering the user's credentials and logging in to their account.
+- ShopPOM: This class represents the behavior of the shop page. It contains methods for selecting and adding items to the user's cart.
+- CartPOM: This class represents the behavior of the cart page. It contains methods for applying discount coupons, navigating to the checkout page, and retrieving cart information such as the subtotal and shipping fees.
+- CheckoutPOM: This class represents the behavior of the checkout page. It contains methods for entering the user's billing information and placing an order.
+- OrderConfirmationPOM: This class represents the behavior of the order confirmation page. It contains methods for verifying the order number displayed on the page.
+- OrdersPOM: This class represents the behavior of the orders page. It contains methods for retrieving the user's order history and verifying the order number displayed on the page.
 
 
 
