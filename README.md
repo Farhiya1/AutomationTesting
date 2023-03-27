@@ -65,6 +65,10 @@ The test scenarios in the project consist of the following steps in the steps de
 
 # POM Classes
 
+To facilitate the steps outlined in the step definitions and improve the maintainability and scalability of the project, the project uses Page Object Model (POM) classes, which represent the behavior of various pages on the e-commerce website and contain methods for interacting with the elements on those pages.
+
+Using POM classes helps to reduce code duplication and improve the overall structure of the test automation code. It also makes it easier to update the tests if the UI of the website changes, as the changes can be made in the POM classes rather than the step definitions themselves.
+
 The project includes the following POM classes:
 
 - LoginPOM: This class represents the behavior of the login page. It contains methods for entering the user's credentials and logging in to their account.
