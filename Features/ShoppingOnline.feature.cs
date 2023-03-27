@@ -110,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I apply the discount coupon \"edgewords\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.Then("I should see a 15% discount applied to my cart total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see a 10% discount applied to my cart total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
