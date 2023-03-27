@@ -85,13 +85,20 @@ public class ShoppingOnlineSteps
             try
             {
                 //Assertions
-                Assert.IsTrue(discount == expectedDiscount, "Discount amount is not correct");
-                Assert.IsTrue(total == expectedTotal, "Total amount is not correct");
+                Assert.That(expectedDiscount, Is.EqualTo(discount));
+                Assert.That(total, Is.EqualTo(expectedTotal));
+
 
             }
             catch (Exception ex)
             {
-                
+
+                Thread.Sleep(700);
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript("arguments[0].scrollIntoView();", driver.FindElement(By.LinkText("Proceed to checkout")));
+
+                //HelperMethods.WaitForElement(By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table"), 10, _driver);
+
                 Helpers.TakeScreenshot(driver, "capturediscount.png");
              
             }
