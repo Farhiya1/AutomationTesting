@@ -66,9 +66,9 @@ namespace E_Commerce_AutomationTesting.POMClasses
             // Print the selected product name
             Console.WriteLine("The product selected is: " + productName);
 
-            // Click the random product element and take a screenshot
+            // Click the random product element
             productElement.Click();
-            Helpers.TakeScreenshot(_driver, "productpicture.png");
+           
             // Add the selected product to the cart
             addToCart.Click();
             
