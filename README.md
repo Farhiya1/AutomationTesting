@@ -12,6 +12,7 @@ Selenium WebDriver
 ChromeDriver
 
 #NuGet Packages
+
 The following NuGet packages are required for this project:
 
 - Selenium.WebDriver 
@@ -33,35 +34,8 @@ The following NuGet packages are required for this project:
 5. Run the tests.
 
 
-# Prerequisites
-
-Visual Studio
-SpecFlow
-Selenium WebDriver
-ChromeDriver
-
-#NuGet Packages
-The following NuGet packages are required for this project:
-
-Selenium.WebDriver
-Selenium.WebDriver.ChromeDriver
-SpecFlow.NUnit
-NUnit3TestAdapter
-NUnit
-Microsoft.NET.Test.Sdk
-FluentAssertions
-SpecFlow.Plus.LivingDocPlugin
-NUnitXml.TestLogger
-
-# Getting Started
-
-Clone this repository to your local machine.
-Open the solution file in Visual Studio.
-Install the necessary NuGet packages.
-Download and install the ChromeDriver.
-Run the tests.
-
 #Running the Tests
+
 To run the tests, open the Test Explorer in Visual Studio and click the "Run All" button. You can also run individual tests by selecting them from the Test Explorer and clicking the "Run" button.
 
 #Feature File
@@ -79,6 +53,7 @@ Each scenario is preceded by a brief description of the behavior it verifies. Th
 
 
 #Steps
+
 The test scenarios in the project consist of the following steps in the steps definition file, which represent the sequence of actions performed by the scenarios and the breakdown of the project's functionality:
 
 Given I am logged in to my account: This step logs in the user to their account.
@@ -89,6 +64,7 @@ When I proceed to checkout: This step proceeds the user to the checkout page.
 Then The order number shown should match the order number on orders page: This step verifies the order number on the order confirmation page with the order number on the orders page.
 
 #POM Classes
+
 The project includes the following POM classes:
 
 LoginPOM: This class represents the behavior of the login page. It contains methods for entering the user's credentials and logging in to their account.
