@@ -6,12 +6,12 @@ This is a C# project for automating e-commerce testing using SpecFlow and Seleni
 
 # Prerequisites
 
-Visual Studio
-SpecFlow
-Selenium WebDriver
-ChromeDriver
+- Visual Studio
+- SpecFlow
+- Selenium WebDriver
+- ChromeDriver
 
-#NuGet Packages
+# NuGet Packages
 
 The following NuGet packages are required for this project:
 
@@ -34,25 +34,27 @@ The following NuGet packages are required for this project:
 5. Run the tests.
 
 
-#Running the Tests
+# Running the Tests
 
 To run the tests, open the Test Explorer in Visual Studio and click the "Run All" button. You can also run individual tests by selecting them from the Test Explorer and clicking the "Run" button.
 
-#Feature File
+# Feature File
 
 The project's feature file, ShoppingOnline.feature, includes the following scenarios:
 
 1. Scenario: Apply discount coupon to cart
+
 This scenario verifies that the user is able to add an item to their cart, apply a discount coupon, and see the correct discount applied to their cart total.
 
 2. Scenario: Purchase item and confirm order number.
+
 This scenario verifies that the user is able to add an item to their cart, proceed to the checkout page, place an order, and confirm that the order number displayed on the order confirmation page matches the order number on the user's orders page.
 
 Each scenario is preceded by a brief description of the behavior it verifies. The scenarios are designed to test the functionality of the login page, shop page, cart page, checkout page, and order confirmation page.
 
 
 
-#Steps
+# Steps
 
 The test scenarios in the project consist of the following steps in the steps definition file, which represent the sequence of actions performed by the scenarios and the breakdown of the project's functionality:
 
@@ -63,7 +65,7 @@ The test scenarios in the project consist of the following steps in the steps de
 - When I proceed to checkout: This step proceeds the user to the checkout page.
 - Then The order number shown should match the order number on orders page: This step verifies the order number on the order confirmation page with the order number on the orders page.
 
-#POM Classes
+# POM Classes
 
 The project includes the following POM classes:
 
@@ -76,7 +78,8 @@ The project includes the following POM classes:
 
 
 
-#Contact:
+# Contact:
+
 Thank you for checking out this project. I hope you found it useful and informative. If you have any questions or suggestions, please feel free to contact me.
 
 Email: farhiya.mahamud@nfocus.co.uk
