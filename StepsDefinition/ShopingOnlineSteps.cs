@@ -8,28 +8,31 @@ using NUnit.Framework;
 //using static E_Commerce_AutomationTesting.Support.HooksClass;
 using static E_Commerce_AutomationTesting.Support.Helpers;
 using E_Commerce_AutomationTesting.Support;
+using TechTalk.SpecFlow.Infrastructure;
 
 namespace E_ommerce_AutomationTesting.StepsDefinition
  {
 
     [Binding]
-public class ShoppingOnlineSteps 
+    public class ShoppingOnlineSteps
 
-{
+    {
         private readonly ScenarioContext _scenarioContext;
+        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
         private IWebDriver driver;
 
 
-        public ShoppingOnlineSteps(ScenarioContext scenarioContext) 
+        public ShoppingOnlineSteps(ScenarioContext scenarioContext, ISpecFlowOutputHelper specFlowOutputHelper)
         {
-            
-             _scenarioContext = scenarioContext;
+
+            _scenarioContext = scenarioContext;
+            _specFlowOutputHelper = specFlowOutputHelper;
             this.driver = (IWebDriver)_scenarioContext["driver"];
-               
-           
+
+
         }
 
-       // Method logs in the user to their account.
+        // Method logs in the user to their account.
 
         [Given(@"I am logged in to my account")]
         public void GivenIAmLoggedInToMyAccount()
@@ -43,12 +46,13 @@ public class ShoppingOnlineSteps
 
         //Method adds an item to the user's cart.
 
-        [When(@"I add an item to my cart")]
-        public void WhenIAddAnItemToMyCart()
+        [When(@"I add an ""(.*)"" to my cart")]
+
+        public void WhenIAddAnItemToMyCart(string item)
         {
             // Create an instance of ShopPOM class and add an item to the cart
             ShopPOM EnterTheShop = new ShopPOM(driver);
-            EnterTheShop.AddItemToCart();
+            EnterTheShop.AddItemToCart(item);
         }
 
         // Method applies a discount coupon to the user's cart.
@@ -78,9 +82,11 @@ public class ShoppingOnlineSteps
             Console.WriteLine($"The current discounted amount is: £{discount} and the expected discount amount is: £{expectedDiscount}");
             decimal total = cart.GetTotal();
             decimal shippingAmount = cart.GetShippingFee();
-            Console.WriteLine(shippingAmount);
             decimal expectedTotal = subtotal - expectedDiscount + shippingAmount;
             Console.WriteLine($"The total amount is: £{total}. The expected total is: £{expectedTotal}.");
+
+            string consoleLog = $"Console log output: The total amount is: £{total}. The expected total is: £{expectedTotal}";
+            _specFlowOutputHelper.WriteLine(consoleLog);
 
             try
             {
@@ -90,17 +96,16 @@ public class ShoppingOnlineSteps
 
 
             }
-            catch (Exception ex)
+            catch (AssertionException discountError)
             {
 
                 Thread.Sleep(700);
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 js.ExecuteScript("arguments[0].scrollIntoView();", driver.FindElement(By.LinkText("Proceed to checkout")));
 
-                //HelperMethods.WaitForElement(By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table"), 10, _driver);
-
+                
                 Helpers.TakeScreenshot(driver, "capturediscount.png");
-             
+                throw (discountError);
             }
         }
 
@@ -115,9 +120,9 @@ public class ShoppingOnlineSteps
             addToCart.GoToCartPage();
             CartPOM proceedToCheckout = new CartPOM(driver);
             proceedToCheckout.NavigateToCheckoutPage();
-            // Create an instance of CheckoutPOM class and navigate to the checkout page.
+            // Create an instance of CheckoutPOM class and enters users billing details stored in the runsettings file
             CheckoutPOM checksout = new CheckoutPOM(driver);
-           // checksout.EnterBillingDetails();
+          
             string firstName = TestContext.Parameters["billingFirstName "];
             string lastName = TestContext.Parameters["billingLastName"];
             string address = TestContext.Parameters["billingAddress"];

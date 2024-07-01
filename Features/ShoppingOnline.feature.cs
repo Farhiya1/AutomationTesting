@@ -85,10 +85,18 @@ namespace E_Commerce_AutomationTesting.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Apply discount coupon to cart")]
-        public void ApplyDiscountCouponToCart()
+        [NUnit.Framework.TestCaseAttribute("Polo", "edgewords", "10", null)]
+        [NUnit.Framework.TestCaseAttribute("Hoodie", "edgewords", "15", null)]
+        [NUnit.Framework.TestCaseAttribute("Sunglasses", "edgewords", "15", null)]
+        [NUnit.Framework.TestCaseAttribute("Cap", "edgewords", "15", null)]
+        [NUnit.Framework.TestCaseAttribute("Belt", "edgewords", "15", null)]
+        public void ApplyDiscountCouponToCart(string item, string coupon, string discountPercentage, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("item", item);
+            argumentsOfScenario.Add("coupon", coupon);
+            argumentsOfScenario.Add("discountPercentage", discountPercentage);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apply discount coupon to cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 11
 this.ScenarioInitialize(scenarioInfo);
@@ -104,13 +112,13 @@ this.ScenarioInitialize(scenarioInfo);
   this.FeatureBackground();
 #line hidden
 #line 12
- testRunner.When("I add an item to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I add an \"{0}\" to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
- testRunner.And("I apply the discount coupon \"edgewords\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I apply the discount coupon \"{0}\"", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.Then("I should see a 10% discount applied to my cart total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see a {0}% discount applied to my cart total", discountPercentage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -118,12 +126,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Purchase item and confirm order number")]
-        public void PurchaseItemAndConfirmOrderNumber()
+        [NUnit.Framework.TestCaseAttribute("Polo", null)]
+        [NUnit.Framework.TestCaseAttribute("Hoodie", null)]
+        [NUnit.Framework.TestCaseAttribute("Sunglasses", null)]
+        public void PurchaseItemAndConfirmOrderNumber(string item, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("item", item);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Purchase item and confirm order number", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
+#line 29
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -136,13 +148,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
   this.FeatureBackground();
 #line hidden
-#line 19
-    testRunner.When("I add an item to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 30
+    testRunner.When(string.Format("I add an \"{0}\" to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
+#line 31
     testRunner.And("I proceed to checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 21
+#line 32
  testRunner.Then("The order number shown should match the order number on orders page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

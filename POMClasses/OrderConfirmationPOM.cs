@@ -1,6 +1,5 @@
 ﻿using E_Commerce_AutomationTesting.Support;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V108.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;

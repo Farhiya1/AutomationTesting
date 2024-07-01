@@ -28,50 +28,43 @@ namespace E_Commerce_AutomationTesting.POMClasses
 
         //Private propeties that return the 'Shop Link', 'Products' and the 'add-to-cart' button elements.
         private IWebElement Shop => _driver.FindElement(By.LinkText("Shop"));
-       private  IList<IWebElement> ProductElementLocator => _driver.FindElements(By.CssSelector("#main > ul > li.product"));
+        private IList<IWebElement> ProductElementLocator => _driver.FindElements(By.CssSelector("#main > ul > li.product"));
+
+        // private IWebElement Product => _driver.FindElement(By.CssSelector("#main > ul > li.product"));
         private IWebElement addToCart => _driver.FindElement(By.Name("add-to-cart"));
 
 
         // Method that enters the shop, selects a random product, and adds it to the cart
-        public void AddItemToCart()
+        public void AddItemToCart(string item)
         {
             //Clicking on shop link
             Shop.Click();
 
-            // Get all the product elements on the page using the ProductElementLocator
-            
+
+            // Get all the product elements on the page
             var productElements = ProductElementLocator;
 
-            // Select a random product 
-            var randomIndex = new Random().Next(0, ProductElementLocator.Count);
-            var productElement = productElements[randomIndex];
+            // Find the product element that matches the specified item
+            var productElement = productElements.FirstOrDefault(element => element.Text.Contains(item));
 
-            // Extract the product name from the product element text
-            string productName = productElement.Text;
-
-            // Determine the index of the pound sign and "SALE!" text in the product name
-            int poundIndex = productName.IndexOf('£');
-            int saleIndex = productName.IndexOf("SALE!");
-            // If the "SALE!" text appears before the pound sign, extract the text before "SALE!"
-            if (saleIndex >= 0 && saleIndex < poundIndex)
+            // Check if the product element is found
+            if (productElement != null)
             {
-                productName = productName.Substring(0, saleIndex).Trim();
+                // Click the product element to add it to the cart
+                productElement.Click();
+
+                // Add the selected product to the cart
+                addToCart.Click();
             }
             else
-            // If the pound sign appears in the product name, extract the text before the pound sign
             {
-
-                productName = poundIndex >= 0 ? productName.Substring(0, poundIndex).Trim() : productName;
+                // Handle the case when the specified item is not found
+                throw new NotFoundException($"Item '{item}' not found on the shop page.");
             }
-            // Print the selected product name
-            Console.WriteLine("The product selected is: " + productName);
 
-            // Click the random product element
-            productElement.Click();
            
-            // Add the selected product to the cart
             addToCart.Click();
-            
+
 
         }
     }
