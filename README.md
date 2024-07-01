@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # E-Commerce-AutomationTesting
 
 This is a C# project for automating e-commerce testing using SpecFlow and Selenium. The project includes two end-to-end tests that cover multiple pages and scenarios to simulate a real-world shopping experience.
@@ -85,3 +86,7 @@ The project includes the following POM classes:
 Thank you for checking out this project. I hope you found it useful and informative. If you have any questions or suggestions, please feel free to contact me.
 
 Email: farhiya.mahamud@nfocus.co.uk
+=======
+# AutomationTesting
+E-Commerce Automation Testing with Selenium and SpecFlow
+>>>>>>> ff5d96302fd85af71b3f84f9759d08b060cfd44d
