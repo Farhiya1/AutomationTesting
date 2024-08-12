@@ -85,7 +85,7 @@ namespace E_Commerce_AutomationTesting.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Apply discount coupon to cart")]
-        [NUnit.Framework.TestCaseAttribute("Polo", "edgewords", "10", null)]
+        [NUnit.Framework.TestCaseAttribute("Polo", "edgewords", "15", null)]
         [NUnit.Framework.TestCaseAttribute("Hoodie", "edgewords", "15", null)]
         [NUnit.Framework.TestCaseAttribute("Sunglasses", "edgewords", "15", null)]
         [NUnit.Framework.TestCaseAttribute("Cap", "edgewords", "15", null)]

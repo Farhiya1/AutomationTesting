@@ -17,7 +17,7 @@ Scenario Outline: Apply discount coupon to cart
 	Examples: 
 	
 	| item       | coupon    | discountPercentage |
-	| Polo       | edgewords | 10                 |
+	| Polo       | edgewords | 15                 |
 	| Hoodie     | edgewords | 15                 |
 	| Sunglasses | edgewords | 15                 |
 	| Cap        | edgewords | 15                 |

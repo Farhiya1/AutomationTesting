@@ -166,7 +166,7 @@ namespace E_ommerce_AutomationTesting.StepsDefinition
             string orderNumberValue = orderNumberConfirmation.ConfirmOrderNumber();
              
                 string orderNumberOnOrderPagValue = orderNumberOnOrderPage.OrdersPage();
-                Helpers.TakeScreenshot(driver, "orderpagenumber.png");
+                //Helpers.TakeScreenshot(driver, "orderpagenumber.png");
 
             //Assert if two order number values are equal.
             Assert.That(orderNumberOnOrderPagValue, Is.EqualTo(orderNumberValue));

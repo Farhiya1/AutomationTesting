@@ -9,6 +9,8 @@ using NUnit.Framework;
 using System.Security.Policy;
 using System.Reflection;
 using OpenQA.Selenium.Support.Extensions;
+using System.IO;
+
 
 namespace E_Commerce_AutomationTesting.Support
 {
@@ -32,12 +34,12 @@ namespace E_Commerce_AutomationTesting.Support
             ITakesScreenshot screenShotBug = driver as ITakesScreenshot;
             Screenshot screenshotForm = screenShotBug.GetScreenshot();
             string filePath = Path.Combine(folderPath, screenshotname);
-            screenshotForm.SaveAsFile(filePath, ScreenshotImageFormat.Png);
+            //screenshotForm.SaveAsFile(filePath, ScreenshotImageFormat.Png);
 
             TestContext.WriteLine("Screenshot - can be viewed in the report");
             TestContext.AddTestAttachment(filePath);
 
-
+             
         }
 
 
