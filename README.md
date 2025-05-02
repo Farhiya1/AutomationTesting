@@ -84,4 +84,4 @@ The project includes the following POM classes:
 
 Thank you for checking out this project. I hope you found it useful and informative. If you have any questions or suggestions, please feel free to contact me.
 
-Email: farhiya.mahamud@gmail.com
+Email: farhiya.i.mahamud@gmail.com
